@@ -56,4 +56,50 @@ job "wasmcloud-job" {
       }
     }
   }
+
+  group "wasmcloud" {
+    count = 1
+
+    network {
+      mode = "bridge"
+
+      port "http" {
+        static = 4000
+      }
+    }
+
+    service {
+      name = "wasmcloud"
+      tags = ["faas"]
+
+      connect {
+        sidecar_service {
+          proxy {
+            upstreams {
+              destination_name = "nats"
+              local_bind_port  = 4222
+            }
+          }
+        }
+      }
+    }
+
+    task "runtime" {
+      driver = "docker"
+
+      env {
+        WASMCLOUD_RPC_HOST      = "${NOMAD_UPSTREAM_IP_nats}"
+        WASMCLOUD_CTL_HOST      = "${NOMAD_UPSTREAM_IP_nats}"
+        WASMCLOUD_PROV_RPC_HOST = "${NOMAD_UPSTREAM_IP_nats}"
+        WASMCLOUD_RPC_PORT      = "${NOMAD_UPSTREAM_PORT_nats}"
+        WASMCLOUD_CTL_PORT      = "${NOMAD_UPSTREAM_PORT_nats}"
+        WASMCLOUD_PROV_RPC_PORT = "${NOMAD_UPSTREAM_PORT_nats}"
+
+      }
+
+      config {
+        image = "louiaduc/wasmcloud-ubuntu:latest"
+      }
+    }
+  }
 }
