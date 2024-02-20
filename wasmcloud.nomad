@@ -94,7 +94,9 @@ job "wasmcloud-job" {
         WASMCLOUD_RPC_PORT      = "${NOMAD_UPSTREAM_PORT_nats}"
         WASMCLOUD_CTL_PORT      = "${NOMAD_UPSTREAM_PORT_nats}"
         WASMCLOUD_PROV_RPC_PORT = "${NOMAD_UPSTREAM_PORT_nats}"
-
+        OCI_REGISTRY = "ghcr.io"
+        OCI_REGISTRY_USER = "kodecraft-louigie"
+        OCI_REGISTRY_PASSWORD="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"
       }
 
       config {
