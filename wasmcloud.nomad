@@ -98,10 +98,6 @@ job "wasmcloud-job" {
         WASMCLOUD_PROV_RPC_PORT = "${NOMAD_UPSTREAM_PORT_nats}"
         WASMCLOUD_RPC_TIMEOUT_MS = "10000"
         WASMCLOUD_ALLOW_FILE_LOAD = "true"
-        WASMCLOUD_STRUCTURED_LOGGING_ENABLED = "true"
-        OCI_REGISTRY = "ghcr.io"
-        OCI_REGISTRY_USER = "kodecraft-louigie"
-        OCI_REGISTRY_PASSWORD="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"
       }
 
       config {
