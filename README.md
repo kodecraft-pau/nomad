@@ -17,6 +17,10 @@ sudo systemctl status --no-pager consul
 logout
 ```
 
+VM default login details:
+* user: `vagrant`
+* password: `vagrant`
+
 ### nomad dashboard
 * http://localhost:4646
 
